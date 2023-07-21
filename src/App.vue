@@ -22,6 +22,55 @@ import HelloWorld from './components/HelloWorld.vue'
 
   <div>
     <h1>{{ name }}</h1>
+    <p>{{ sid }}</p>
+
+    <input 
+      v-on:keyup.enter="addItem"
+      type="text" placeholder="Add new item" name="additem" v-model="newItem"/>
+    {{ newItem }}
+
+    <br/>
+    <br/>
+
+    <button v-on:click="addItem">Submit</button>
+
+    <br/>
+    <br />
+
+    <label>
+      <input type="checkbox" v-model="isNewItemHighPriority">
+      High priority
+    </label>
+
+    <br />
+    
+    <select v-model="newItemHighPriority">
+      <option value="no">No</option>
+      <option value="yes">Yes</option>
+    </select>
+
+    <br/>
+
+    {{ isNewItemHighPriority }}
+
+    <br />
+    {{ newItemHighPriority }}
+
+
+    <div>
+      
+      <div><label><input type="checkbox" v-model="icecreamFavor" value="vanila"/> Vanila</label> </div>
+      <div><label><input type="checkbox" v-model="icecreamFavor" value="rose"/> Rose</label></div>
+      <div><label><input type="checkbox" v-model="icecreamFavor" value="starbery"/> Stab</label></div>
+      <div><label><input type="checkbox" v-model="icecreamFavor" value="orange"/> Orange</label></div>
+    </div>
+
+
+
+    <ul>
+      <li v-for="item in items" :key="item.id">{{ item.label }}</li>
+    </ul>
+
   </div>
 
 </template>
@@ -31,9 +80,29 @@ import HelloWorld from './components/HelloWorld.vue'
 export default {
   data () {
     return {
-      name: "HelloVue from state"
+      name: "oVue from state",
+      sid: "o Sid",
+      newItem: "",
+      isNewItemHighPriority: false,
+      newItemHighPriority: "no",
+
+      icecreamFavor: [],
+
+      items: [
+        {id: 1, label:"One"},
+        {id: 2, label: "Two"},
+        {id:3, label: "Three"}
+      ]
+    }
+  },
+  methods: {
+    addItem() {
+      this.items.push({id: this.items.length+1, label: this.newItem})
+      this.newItem = ""
     }
   }
+
+
 }
 
 
