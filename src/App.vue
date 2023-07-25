@@ -1,6 +1,8 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import Counter from "@/components/Counter.vue";
+import  BlogPost from "@/components/BlogPost.vue";
 </script>
 
 <template>
@@ -20,7 +22,11 @@ import HelloWorld from './components/HelloWorld.vue'
   <RouterView /> -->
 
 
-  <div>
+  <div class="flex flex-col items-center ">
+
+    <Counter />
+
+
     <h1>{{ name }}</h1>
     <p>{{ sid }}</p>
 
@@ -67,9 +73,14 @@ import HelloWorld from './components/HelloWorld.vue'
 
 
 
-    <ul>
-      <li v-for="item in items" :key="item.id">{{ item.label }}</li>
-    </ul>
+    <div :style="{ fontSize: fontSizeRef + 'em'}">
+      <BlogPost 
+        v-for="item in items" 
+        :key="item.id" 
+        :post="item" 
+        @enlarge-text="fontSizeRef += 0.1"
+      >THis is SLot descriotioiotnbo</BlogPost>
+    </div>
 
   </div>
 
@@ -86,12 +97,14 @@ export default {
       isNewItemHighPriority: false,
       newItemHighPriority: "no",
 
+      fontSizeRef: 1,
+
       icecreamFavor: [],
 
       items: [
-        {id: 1, label:"One"},
-        {id: 2, label: "Two"},
-        {id:3, label: "Three"}
+        {id: 1, title:"One" , description: "For One Id"},
+        {id: 2, title: "Two", description: "For Two Id"},
+        {id: 3, title: "Three", description: "For Three Id"}
       ]
     }
   },
